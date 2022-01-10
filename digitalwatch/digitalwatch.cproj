@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.microchip.xc8</ToolchainName>
+    <ProjectGuid>2285C48D-296E-43FD-A7B6-69885F64CFFD</ProjectGuid>
+    <avrdevice>ATmega1284</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>C</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AssemblyName>digitalwatch</AssemblyName>
+    <Name>digitalwatch</Name>
+    <RootNamespace>digitalwatch</RootNamespace>
+    <ToolchainFlavour>XC8_2.31</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>true</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <ResetRule>0</ResetRule>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <EraseKey />
+    <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
+    <avrtoolserialnumber>J41800077348</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x1E9706</avrdeviceexpectedsignature>
+    <com_atmel_avrdbg_tool_jtagice3plus>
+      <ToolOptions>
+        <InterfaceProperties>
+          <JtagDbgClock>200000</JtagDbgClock>
+        </InterfaceProperties>
+        <InterfaceName>JTAG</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.jtagice3plus</ToolType>
+      <ToolNumber>J30200032558</ToolNumber>
+      <ToolName>JTAGICE3</ToolName>
+    </com_atmel_avrdbg_tool_jtagice3plus>
+    <avrtoolinterface>JTAG</avrtoolinterface>
+    <com_atmel_avrdbg_tool_jtagicemk3>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.jtagicemk3</ToolType>
+      <ToolNumber xmlns="">J30200032558</ToolNumber>
+      <ToolName xmlns="">JTAGICE3</ToolName>
+    </com_atmel_avrdbg_tool_jtagicemk3>
+    <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
+    <custom>
+      <ToolOptions>
+        <InterfaceProperties>
+          <JtagDbgClock>200000</JtagDbgClock>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType>custom</ToolType>
+      <ToolNumber>
+      </ToolNumber>
+      <ToolName>Custom Programming Tool</ToolName>
+    </custom>
+    <com_atmel_avrdbg_tool_atmelice>
+      <ToolOptions>
+        <InterfaceProperties>
+          <JtagDbgClock>200000</JtagDbgClock>
+        </InterfaceProperties>
+        <InterfaceName>JTAG</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
+      <ToolNumber>J41800077348</ToolNumber>
+      <ToolName>Atmel-ICE</ToolName>
+    </com_atmel_avrdbg_tool_atmelice>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <com.microchip.xc8>
+        <com.microchip.xc8.common.optimization.RelaxBranches>True</com.microchip.xc8.common.optimization.RelaxBranches>
+        <com.microchip.xc8.compiler.general.ChangeDefaultCharTypeUnsigned>True</com.microchip.xc8.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <com.microchip.xc8.compiler.general.ChangeDefaultBitFieldUnsigned>True</com.microchip.xc8.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <com.microchip.xc8.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>(%24DeviceMacro)</Value>
+            <Value>NDEBUG</Value>
+          </ListValues>
+        </com.microchip.xc8.compiler.symbols.DefSymbols>
+        <com.microchip.xc8.compiler.optimization.level>Optimize for size (-Os)</com.microchip.xc8.compiler.optimization.level>
+        <com.microchip.xc8.compiler.optimization.PackStructureMembers>True</com.microchip.xc8.compiler.optimization.PackStructureMembers>
+        <com.microchip.xc8.compiler.optimization.AllocateBytesNeededForEnum>True</com.microchip.xc8.compiler.optimization.AllocateBytesNeededForEnum>
+        <com.microchip.xc8.compiler.warnings.AllWarnings>True</com.microchip.xc8.compiler.warnings.AllWarnings>
+        <com.microchip.xc8.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </com.microchip.xc8.linker.libraries.Libraries>
+      </com.microchip.xc8>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <com.microchip.xc8>
+  <com.microchip.xc8.common.outputfiles.hex>True</com.microchip.xc8.common.outputfiles.hex>
+  <com.microchip.xc8.common.outputfiles.eep>True</com.microchip.xc8.common.outputfiles.eep>
+  <com.microchip.xc8.common.outputfiles.usersignatures>False</com.microchip.xc8.common.outputfiles.usersignatures>
+  <com.microchip.xc8.common.outputfiles.lss>True</com.microchip.xc8.common.outputfiles.lss>
+  <com.microchip.xc8.compiler.general.ChangeDefaultCharTypeUnsigned>True</com.microchip.xc8.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <com.microchip.xc8.compiler.general.ChangeDefaultBitFieldUnsigned>True</com.microchip.xc8.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <com.microchip.xc8.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>(%24DeviceMacro)</Value>
+      <Value>DEBUG</Value>
+    </ListValues>
+  </com.microchip.xc8.compiler.symbols.DefSymbols>
+  <com.microchip.xc8.compiler.optimization.PackStructureMembers>True</com.microchip.xc8.compiler.optimization.PackStructureMembers>
+  <com.microchip.xc8.compiler.optimization.AllocateBytesNeededForEnum>True</com.microchip.xc8.compiler.optimization.AllocateBytesNeededForEnum>
+  <com.microchip.xc8.compiler.optimization.DebugLevel>Default (-g2)</com.microchip.xc8.compiler.optimization.DebugLevel>
+  <com.microchip.xc8.compiler.warnings.AllWarnings>True</com.microchip.xc8.compiler.warnings.AllWarnings>
+  <com.microchip.xc8.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </com.microchip.xc8.linker.libraries.Libraries>
+  <com.microchip.xc8.assembler.debugging.DebugLevel>Default (-Wa,-g)</com.microchip.xc8.assembler.debugging.DebugLevel>
+</com.microchip.xc8>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="buttonHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="buttonHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="gfxLib.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="gfxLib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pages\mainPage.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pages\mainPage.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pages\pages.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pages\setTimePage.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pages\setTimePage.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timing.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timing.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="uart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pages" />
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>
