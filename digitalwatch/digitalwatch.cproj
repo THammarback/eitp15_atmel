@@ -34,12 +34,12 @@
     <com_atmel_avrdbg_tool_jtagice3plus>
       <ToolOptions>
         <InterfaceProperties>
-          <JtagDbgClock>200000</JtagDbgClock>
+          <JtagDbgClock>0</JtagDbgClock>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.jtagice3plus</ToolType>
-      <ToolNumber>J30200032558</ToolNumber>
+      <ToolNumber>J30200000612</ToolNumber>
       <ToolName>JTAGICE3</ToolName>
     </com_atmel_avrdbg_tool_jtagice3plus>
     <avrtoolinterface>JTAG</avrtoolinterface>
@@ -107,29 +107,30 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <com.microchip.xc8>
-  <com.microchip.xc8.common.outputfiles.hex>True</com.microchip.xc8.common.outputfiles.hex>
-  <com.microchip.xc8.common.outputfiles.eep>True</com.microchip.xc8.common.outputfiles.eep>
-  <com.microchip.xc8.common.outputfiles.usersignatures>False</com.microchip.xc8.common.outputfiles.usersignatures>
-  <com.microchip.xc8.common.outputfiles.lss>True</com.microchip.xc8.common.outputfiles.lss>
-  <com.microchip.xc8.compiler.general.ChangeDefaultCharTypeUnsigned>True</com.microchip.xc8.compiler.general.ChangeDefaultCharTypeUnsigned>
-  <com.microchip.xc8.compiler.general.ChangeDefaultBitFieldUnsigned>True</com.microchip.xc8.compiler.general.ChangeDefaultBitFieldUnsigned>
-  <com.microchip.xc8.compiler.symbols.DefSymbols>
-    <ListValues>
-      <Value>(%24DeviceMacro)</Value>
-      <Value>DEBUG</Value>
-    </ListValues>
-  </com.microchip.xc8.compiler.symbols.DefSymbols>
-  <com.microchip.xc8.compiler.optimization.PackStructureMembers>True</com.microchip.xc8.compiler.optimization.PackStructureMembers>
-  <com.microchip.xc8.compiler.optimization.AllocateBytesNeededForEnum>True</com.microchip.xc8.compiler.optimization.AllocateBytesNeededForEnum>
-  <com.microchip.xc8.compiler.optimization.DebugLevel>Default (-g2)</com.microchip.xc8.compiler.optimization.DebugLevel>
-  <com.microchip.xc8.compiler.warnings.AllWarnings>True</com.microchip.xc8.compiler.warnings.AllWarnings>
-  <com.microchip.xc8.linker.libraries.Libraries>
-    <ListValues>
-      <Value>libm</Value>
-    </ListValues>
-  </com.microchip.xc8.linker.libraries.Libraries>
-  <com.microchip.xc8.assembler.debugging.DebugLevel>Default (-Wa,-g)</com.microchip.xc8.assembler.debugging.DebugLevel>
-</com.microchip.xc8>
+        <com.microchip.xc8.common.outputfiles.hex>True</com.microchip.xc8.common.outputfiles.hex>
+        <com.microchip.xc8.common.outputfiles.eep>True</com.microchip.xc8.common.outputfiles.eep>
+        <com.microchip.xc8.common.outputfiles.usersignatures>False</com.microchip.xc8.common.outputfiles.usersignatures>
+        <com.microchip.xc8.common.outputfiles.lss>True</com.microchip.xc8.common.outputfiles.lss>
+        <com.microchip.xc8.compiler.general.ChangeDefaultCharTypeUnsigned>True</com.microchip.xc8.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <com.microchip.xc8.compiler.general.ChangeDefaultBitFieldUnsigned>True</com.microchip.xc8.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <com.microchip.xc8.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>(%24DeviceMacro)</Value>
+            <Value>DEBUG</Value>
+          </ListValues>
+        </com.microchip.xc8.compiler.symbols.DefSymbols>
+        <com.microchip.xc8.compiler.optimization.level>Optimize debugging experience (-Og)</com.microchip.xc8.compiler.optimization.level>
+        <com.microchip.xc8.compiler.optimization.PackStructureMembers>True</com.microchip.xc8.compiler.optimization.PackStructureMembers>
+        <com.microchip.xc8.compiler.optimization.AllocateBytesNeededForEnum>True</com.microchip.xc8.compiler.optimization.AllocateBytesNeededForEnum>
+        <com.microchip.xc8.compiler.optimization.DebugLevel>Default (-g2)</com.microchip.xc8.compiler.optimization.DebugLevel>
+        <com.microchip.xc8.compiler.warnings.AllWarnings>True</com.microchip.xc8.compiler.warnings.AllWarnings>
+        <com.microchip.xc8.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </com.microchip.xc8.linker.libraries.Libraries>
+        <com.microchip.xc8.assembler.debugging.DebugLevel>Default (-Wa,-g)</com.microchip.xc8.assembler.debugging.DebugLevel>
+      </com.microchip.xc8>
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
@@ -139,10 +140,22 @@
     <Compile Include="buttonHandler.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="max30102.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="gfxLib.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="gfxLib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="max30102.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mpu6050.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mpu6050.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="pages\mainPage.c">
@@ -160,10 +173,22 @@
     <Compile Include="pages\setTimePage.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="pages\timerPage.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pages\timerPage.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="timing.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timing.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="twi_master.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="twi_master.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.h">

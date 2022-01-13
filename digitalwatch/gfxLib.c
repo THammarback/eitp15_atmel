@@ -1,8 +1,12 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
 #include "uart.h"
 
 void _render(int length, char *data){
+	cli();
 	for(int i=0; i<length; i++){
 		USART_Transmit(data[i]);
 	}
@@ -12,6 +16,7 @@ void _render(int length, char *data){
 	}else{
 		PORTB |= (1<<PORTB6);
 	}
+	sei();
 	PORTB &= ~((1<<PORTB7) | (1<<PORTB6) | (1<<PORTB5));
 }
 
@@ -22,6 +27,28 @@ char* gfx_number_to_char(int n, int number){ // function found on stackoverflow
         numberArray[i] = (number % 10) + '0';
     }
     return numberArray;
+}
+
+char* gfx_float_to_char(int n_i, int n_f, float number){
+	char* str_float = calloc(n_i + n_f + 2, sizeof(char)); // array to hold the result
+	char dot = '.';
+
+	if(number<0){
+		number = -number;
+		str_float[0] = '-';
+	}else{
+		str_float[0] = '+';
+	}
+
+	int integerPart = (int) number;
+	int floatPart = (int) ((number-integerPart) * pow(10, n_f));
+	
+	memcpy(str_float + 1, gfx_number_to_char(n_i, integerPart), n_i * sizeof(char));
+	memcpy(str_float + n_i + 1, &dot, sizeof(char));
+	memcpy(str_float + n_i + 2, gfx_number_to_char(n_f, floatPart), n_f * sizeof(char));
+	
+	return str_float;
+
 }
 
 void gfx_clear(){
@@ -38,12 +65,25 @@ void gfx_text_color(int color){
 void gfx_set_cursor(int x, int y){
 	_render(6, (char[]) {
 		0xFF, 0xE4,
-		((x & 0xFF00) >>8), (x & 0x00FF),
-		((y & 0xFF00) >>8), (y & 0x00FF)
+		((y & 0xFF00) >>8), (y & 0x00FF),
+		((x & 0xFF00) >>8), (x & 0x00FF)
 	});
 }
 
 void gfx_put_string(const int length, char* characters){
+	char command[length+3];
+	command[0] = 0x00; //cmd
+	command[1] = 0x06; //cmd
+
+	for (int i=0; i<length; i++){
+		command[i+2] = characters[i];
+	}
+	command[length+2] = 0x00; //end with null
+	
+	_render(length+3, command);
+}
+
+void gfx_put_const_string(const int length, const char* characters){
 	char command[length+3];
 	command[0] = 0x00; //cmd
 	command[1] = 0x06; //cmd
@@ -67,45 +107,56 @@ void gfx_draw_rect(int x1, int y1, int x2, int y2, int color){
 	});
 }
 
+void gfx_put_weekday(int weekday){
+	switch(weekday){
+		case 0:
+			gfx_put_const_string(9, "Sunday   ");
+			break;
+		case 1:
+			gfx_put_const_string(9, "Monday   ");
+			break;
+		case 2:
+			gfx_put_const_string(9, "Tuesday  ");
+			break;
+		case 3:
+			gfx_put_const_string(9, "Wednesday");
+			break;
+		case 4:
+			gfx_put_const_string(9, "Thursday ");
+			break;
+		case 5:
+			gfx_put_const_string(9, "Friday   ");
+			break;
+		case 6:
+			gfx_put_const_string(9, "Saturday ");
+			break;
+	}
+}
+
 void gfx_put_month(int month){
-	char const *str_months[12] = {
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December"
-	};
-	
 	if(month == 1){
-		gfx_put_string(7, *str_months[0]);
+		gfx_put_const_string(9, "January  ");
 	} else if(month == 2){
-		gfx_put_string(8, *str_months[1]);
+		gfx_put_const_string(9, "February ");
 	} else if(month == 3){
-		gfx_put_string(5, *str_months[2]);
+		gfx_put_const_string(9, "March    ");
 	} else if(month == 4){
-		gfx_put_string(5, *str_months[3]);
+		gfx_put_const_string(9, "April    ");
 	} else if(month == 5){
-		gfx_put_string(3, *str_months[4]);
+		gfx_put_const_string(9, "May      ");
 	} else if(month == 6){
-		gfx_put_string(4, *str_months[5]);
+		gfx_put_const_string(9, "June     ");
 	} else if(month == 7){
-		gfx_put_string(4, *str_months[6]);
+		gfx_put_const_string(9, "July     ");
 	} else if(month == 8){
-		gfx_put_string(6, *str_months[7]);
+		gfx_put_const_string(9, "August   ");
 	} else if(month == 9){
-		gfx_put_string(9, *str_months[8]);
+		gfx_put_const_string(9, "September");
 	} else if(month == 10){
-		gfx_put_string(7, *str_months[9]);
+		gfx_put_const_string(9, "October  ");
 	} else if(month == 11){
-		gfx_put_string(8, *str_months[10]);
+		gfx_put_const_string(9, "November ");
 	} else if(month == 12){
-		gfx_put_string(8, *str_months[11]);
+		gfx_put_const_string(9, "December ");
 	}
 }

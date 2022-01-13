@@ -11,6 +11,13 @@ int years = 2022;
 
 char weekday[] = "Saturday";
 
+int time_get_weekday(){
+	int d = days;
+	int m = months;
+	int y = years;
+	return (d += m < 3 ? y-- : y - 2, 23*m/9 + d + 4 + y/4- y/100 + y/400)%7;
+}
+
 int time_get_seconds(){
 	return (seconds);
 }
@@ -30,6 +37,54 @@ int time_get_years(){
 	return (years);
 }
 
+void time_set_seconds(int s){
+	seconds = s;
+}
+void time_set_minutes(int m){
+	minutes = m;
+}
+void time_set_hours(int h){
+	hours = h;
+}
+void time_set_days(int d){
+	days = d;
+}
+void time_set_months(int m){
+	months = m;
+}
+void time_set_years(int y){
+	years = y;
+}
+
+int days_in_month(int month){
+	switch(month){
+		case 1:
+			return 31;
+		case 2:
+			return 28;
+		case 3:
+			return 31;
+		case 4:
+			return 30;
+		case 5:
+			return 31;
+		case 6:
+			return 30;
+		case 7:
+			return 31;
+		case 8:
+			return 31;
+		case 9:
+			return 30;
+		case 10:
+			return 31;
+		case 11:
+			return 30;
+		case 12:
+			return 31;
+	}
+}
+
 void _update_time(){
 	if(seconds++ != 59){
 		return;
@@ -43,14 +98,14 @@ void _update_time(){
 		return;
 	}
 	hours = 0;
-	if(++days != 31){
+	if(days++ != days_in_month(months)){
 		return;
 	}
-	days = 0;
-	if(++months != 12){
+	days = 1;
+	if(months++ != 12){
 		return;
 	}
-	months = 0;
+	months = 1;
 	years++;
 }
 
