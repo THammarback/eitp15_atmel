@@ -24,17 +24,4 @@ void USART_Init() {
 	UCSR0B = (1<<RXEN0)|(1<<TXEN0);
 	/* Set frame format: 8data, 1stop bit */
 	UCSR0C = (1<<UCSZ01)|(1<<UCSZ00);
-
-/*	
-	char setBaudRate[] = {0x00, 0x0B, 0x00, 0x0B}; // sets the baudrate on the display to 250k
-	for(int i=0; i<4; i++){
-		USART_Transmit(setBaudRate[i]); 
-	}
-	UBRR0 = (int) BAUD_250k;
-
-	if(USART_Receive() != 0x06){
-		while(1){} //ERROR
-	}
-	
-*/
 }

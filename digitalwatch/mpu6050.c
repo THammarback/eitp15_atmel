@@ -4,7 +4,6 @@
 void ERROR_CHECK(ret_code_t error_code){
 	if (error_code != SUCCESS){
 		//Not sure how to handle this yet
-		while (1); // loop indefinitely
 	}
 }
 

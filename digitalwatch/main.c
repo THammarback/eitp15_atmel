@@ -23,14 +23,17 @@
 #include "pages/mainPage.h"
 #include "pages/setTimePage.h"
 #include "pages/timerPage.h"
+#include "pages/alarmPage.h"
+#include "pages/pedoPage.h"
 
 void update_page(int *currentPage);
+
 
 int main (void)
 {
 	tw_init(TW_FREQ_400K, true); // set I2C Frequency, enable internal pull-up
-	mpu_init();
 	_delay_ms(3000); //wait for screen to start
+	mpu_init();
 	USART_Init();
 	clock_init();	
 	
@@ -42,8 +45,9 @@ int main (void)
 	DDRB |= (1<<DDRB7)|(1<<DDRB6)|(1<<DDRB5); // only for debug, not connected on the actual board.
 	
 	while(1){
+		update_pedo();
+		update_time(&currentPage);
 		update_page(&currentPage);
-		
 		update_buttons();
 	}
 }
@@ -58,6 +62,12 @@ void update_page(int *currentPage){
 			break;
 		case TIMERPAGE:
 			timerPage_update(currentPage);
+			break;
+		case ALARMPAGE:
+			alarmPage_update(currentPage);
+			break;
+		case PEDOPAGE:
+			pedoPage_update(currentPage);
 			break;
 	}
 }
